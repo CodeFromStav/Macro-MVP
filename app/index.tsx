@@ -14,23 +14,28 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 //Button redirect to X login
 
 const TextInputLogin = () => { 
-  const [username, setUsername] = React.useState("Username");
-  const [password, setPassword] = React.useState("Password");
+  const [usernameText, setUsername] = React.useState("");
+  const [passwordText, setPassword] = React.useState("");
 
   return ( 
     //Safe ensures text wont be blocked by screen edges/notch
     <SafeAreaProvider> 
-      <SafeAreaView>
+      <SafeAreaView style = {styles.container}>
         <TextInput
           style = {styles.input}
           onChangeText={setUsername}
-          value={username}
+          value={usernameText}
+          placeholder = "Username" 
+          placeholderTextColor={"gray"}
         />
         
         <TextInput 
           style = {styles.input}
           onChangeText={setPassword}
-          value={password}
+          value={passwordText}
+          placeholder = "Password"
+          placeholderTextColor={"gray"}
+
           />
       </SafeAreaView>
     </SafeAreaProvider>
@@ -38,8 +43,15 @@ const TextInputLogin = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1, // Fill the entire screen
+    justifyContent: "center", // Center vertically
+    alignItems: "center", // Center horizontally
+    backgroundColor: "#F5FCFF", // Background color
+  },
   input: {
     height: 40,
+    width: 250,
     margin: 12,
     borderWidth: 1,
     padding: 10,

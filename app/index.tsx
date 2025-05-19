@@ -1,8 +1,8 @@
 //Login Screen
+import SubmitButton from '@/components/SubmitButton';
 import React from 'react';
 import { StyleSheet, TextInput } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
 //Title Macro App
 
 //Text Field Username (textinput) https://reactnative.dev/docs/textinput
@@ -35,8 +35,9 @@ const TextInputLogin = () => {
           value={passwordText}
           placeholder = "Password"
           placeholderTextColor={"gray"}
-
           />
+
+        <SubmitButton />
       </SafeAreaView>
     </SafeAreaProvider>
   )

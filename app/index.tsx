@@ -1,9 +1,10 @@
 //Login Screen
 import SubmitButton from '@/components/SubmitButton';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { StyleSheet, TextInput } from "react-native";
+import { Alert, StyleSheet, TextInput } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-//Title Macro App
+
 
 //Text Field Username (textinput) https://reactnative.dev/docs/textinput
 //Text Feild Password (textinput)
@@ -13,22 +14,31 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 //Button redirect to Apple login
 //Button redirect to X login
 
+
 const TextInputLogin = () => { 
   const [usernameText, setUsername] = React.useState("");
   const [passwordText, setPassword] = React.useState("");
+  const router = useRouter();
+
+  const handleSubmit = () => {
+    if (!usernameText || !passwordText) {
+      Alert.alert('handleSubmit function called');
+    } 
+    router.push('/diary'); // Redirect to the diary page
+  };
 
   return ( 
     //Safe ensures text wont be blocked by screen edges/notch
     <SafeAreaProvider> 
       <SafeAreaView style = {styles.container}>
-        <TextInput
+        
+        <TextInput 
           style = {styles.input}
           onChangeText={setUsername}
           value={usernameText}
           placeholder = "Username" 
           placeholderTextColor={"gray"}
         />
-        
         <TextInput 
           style = {styles.input}
           onChangeText={setPassword}
@@ -36,8 +46,9 @@ const TextInputLogin = () => {
           placeholder = "Password"
           placeholderTextColor={"gray"}
           />
+        
+        <SubmitButton onPressSubmit={ handleSubmit }/>
 
-        <SubmitButton />
       </SafeAreaView>
     </SafeAreaProvider>
   )
@@ -50,27 +61,14 @@ const styles = StyleSheet.create({
     alignItems: "center", // Center horizontally
     backgroundColor: "#F5FCFF", // Background color
   },
-  input: {
-    height: 40,
-    width: 250,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
+    input: {
+      height: 40,
+      width: 250,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
   },
 });
 
-export default TextInputLogin
+export default TextInputLogin;;
 
-// export default function Index() {
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center",
-//       }}
-//     >
-//       <Text>Edit app/index.tsx to edit this screen.</Text>
-//     </View>
-//   );
-// }

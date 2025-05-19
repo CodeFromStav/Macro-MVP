@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-const onPressSubmit = () => {
-    console.log ('Submit button pressed');
+type Props = { // Define the type of the props
+  onPressSubmit: () => void;
 };
 
 const styles = StyleSheet.create({
@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SubmitButton() {
+
+
+export default function SubmitButton({ onPressSubmit }: Props) {
     return (
     <TouchableOpacity style={styles.buttonContainer} onPress={onPressSubmit}>
      <Text style={styles.buttonLabel}>Submit</Text>

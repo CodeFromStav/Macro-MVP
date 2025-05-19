@@ -22,7 +22,8 @@ const TextInputLogin = () => {
 
   const handleSubmit = () => {
     if (!usernameText || !passwordText) {
-      Alert.alert('handleSubmit function called');
+      Alert.alert('Please fill in all fields');
+      return;
     } 
     router.push('/diary'); // Redirect to the diary page
   };

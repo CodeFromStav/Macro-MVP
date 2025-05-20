@@ -26,9 +26,6 @@ const DiaryScreen = () => {
             </ScrollView>
         ))}
         
-        {/* Example of a large text to demonstrate scrolling */}
-        <Text style = {{fontSize: 96}}>Scroll weeee</Text>
-
         
     </ScrollView>
     )

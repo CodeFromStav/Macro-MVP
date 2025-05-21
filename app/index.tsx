@@ -18,7 +18,7 @@ const TextInputLogin = () => {
       Alert.alert('Please fill in all fields');
       return;
     } 
-    router.push('/diary'); // Redirect to the diary page
+    router.push('/diaryScreen'); // Redirect to the diary page
   };
 
   return ( 

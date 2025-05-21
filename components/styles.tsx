@@ -52,5 +52,30 @@ export const diary_style = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
   },
+  header: {
+  paddingHorizontal: 16,
+  paddingTop: 24,
+  paddingBottom: 8,
+  backgroundColor: '#1a1a1a', // or whatever your main background is
+}, 
 });
-//    export default diary_style;
+
+export const food_search_style = StyleSheet.create({
+    container: { padding: 16 },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 8,
+    marginBottom: 10,
+    borderRadius: 6,
+  },
+  resultItem: {
+    padding: 10,
+    backgroundColor: '#eee',
+    marginBottom: 8,
+    borderRadius: 6,
+  },
+  name: { fontWeight: 'bold' },
+  details: { fontSize: 12, color: '#666' },
+});
+

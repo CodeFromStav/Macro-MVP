@@ -1,6 +1,7 @@
 import FoodSearch from '@/components/foodSearch';
 import { diary_style } from '@/components/styles';
-import React, { useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 
 interface FoodItem {
@@ -10,31 +11,83 @@ interface FoodItem {
 }
 
 const DiaryScreen = () => {
-  const [diaryItems, setDiaryItems] = useState<FoodItem[]>([]);
+ 
+  type DiaryByMeal = Record<string, FoodItem[]>;
 
-  const addFoodToDiary = (item: FoodItem) => {
-    setDiaryItems((prevItems) => [...prevItems, item]);
+  
+  const [diaryItems, setDiaryItems] = useState<DiaryByMeal>({
+    Breakfast: [],
+    Lunch: [],
+    Dinner: [],
+  });
+
+  // const [selectedMeal, setSelectedMeal] = useState('Breakfast');
+  //Sets meal based on time of day.
+  const [selectedMeal, setSelectedMeal] = useState('');
+  useEffect(() => {
+    const getDefaultMealByTime = () => {
+      const hour = new Date().getHours();
+
+      if (hour < 11) return 'Breakfast';
+      if (hour < 16) return 'Lunch';
+      return 'Dinner';
   };
+
+  const defaultMeal = getDefaultMealByTime();
+  setSelectedMeal(defaultMeal);
+}, []);
+  
+  const addFoodToDiary = (meal: string, item: FoodItem) => {
+  setDiaryItems((prev) => ({
+    ...prev,
+    [meal]: [...prev[meal], item],
+  }));
+};
+
+
+ 
 
   return (
     <FlatList
-      data={diaryItems}
-      keyExtractor={(item) => item.fdcId.toString()}
-      renderItem={({ item }) => (
-        <View style={diary_style.foodTile}>
-          <Text style={diary_style.foodText}>{item.description}</Text>
-        </View>
-      )}
-      /*This allows more than one scrollable FlatList on the screen
-      and creates a food search above the list */
+    /* data and renderItem strange typescript req. */
+      data={[]}
+      renderItem={() => null}
+      
       ListHeaderComponent={ 
         <View style={diary_style.header}>
-          <FoodSearch onFoodSelect={addFoodToDiary} />
-          <Text style={diary_style.sectionTitle}>Diary Entries</Text>
+
+          {selectedMeal !== '' && (
+          <Picker
+            selectedValue={selectedMeal}
+            onValueChange={(itemValue) => setSelectedMeal(itemValue)}
+            style={diary_style.picker}
+          >
+            <Picker.Item label="Breakfast" value="Breakfast" />
+            <Picker.Item label="Lunch" value="Lunch" />
+            <Picker.Item label="Dinner" value="Dinner" />
+          </Picker>
+        )}
+          
+            <FoodSearch onFoodSelect={(item) => addFoodToDiary(selectedMeal, item)} />
+            <Text style={diary_style.sectionTitle}>Diary Entries</Text>
+
+          {Object.entries(diaryItems).map(([meal, items]) => (
+            <View key={meal} style={diary_style.sectionCard}>
+              <Text style={diary_style.sectionTitle}>{meal}</Text>
+              <View style={diary_style.foodItemContainer}>
+                {items.map((item) => (
+                  <View key={item.fdcId} style={diary_style.foodTile}>
+                    <Text style={diary_style.foodText}>{item.description}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          ))}
         </View>
       }
       contentContainerStyle={diary_style.container}
     />
+    
   );
 };
 

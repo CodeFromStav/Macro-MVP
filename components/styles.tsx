@@ -56,8 +56,17 @@ export const diary_style = StyleSheet.create({
   paddingHorizontal: 16,
   paddingTop: 24,
   paddingBottom: 8,
-  backgroundColor: '#1a1a1a', // or whatever your main background is
-}, 
+  backgroundColor: '#white', // or whatever your main background is
+  },
+
+  picker: {
+  marginVertical: 12,
+  backgroundColor: '#333',
+  color: '#fff',
+  borderRadius: 8,
+  paddingHorizontal: 8,
+},
+ 
 });
 
 export const food_search_style = StyleSheet.create({

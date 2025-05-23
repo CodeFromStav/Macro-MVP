@@ -27,8 +27,8 @@ export const diary_style = StyleSheet.create({
   sectionCard: {
     backgroundColor: '#333',
     borderRadius: 12,
-    padding: 16,
-    marginBottom: 16,
+    padding: 10,
+    marginBottom: 15,
   },
   sectionTitle: {
     fontSize: 18,
@@ -56,12 +56,12 @@ export const diary_style = StyleSheet.create({
   paddingHorizontal: 16,
   paddingTop: 24,
   paddingBottom: 8,
-  backgroundColor: '#white', // or whatever your main background is
+  backgroundColor: 'grey', // or whatever your main background is
   },
 
   picker: {
   marginVertical: 12,
-  backgroundColor: '#333',
+  backgroundColor: 'white',
   color: '#fff',
   borderRadius: 8,
   paddingHorizontal: 8,
@@ -74,13 +74,14 @@ export const food_search_style = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
+    backgroundColor: 'yellow',
     padding: 8,
     marginBottom: 10,
     borderRadius: 6,
   },
   resultItem: {
-    padding: 10,
-    backgroundColor: '#eee',
+    padding: 5,
+    backgroundColor: 'beige',
     marginBottom: 8,
     borderRadius: 6,
   },

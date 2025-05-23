@@ -1,15 +1,13 @@
 import FoodSearch from '@/components/foodSearch';
 import { diary_style } from '@/components/styles';
-import { Picker } from '@react-native-picker/picker';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
-
+import { Button, Menu } from 'react-native-paper';
 interface FoodItem {
   fdcId: number;
   description: string;
   brandOwner?: string;
 }
-
 const DiaryScreen = () => {
  
   type DiaryByMeal = Record<string, FoodItem[]>;
@@ -24,6 +22,8 @@ const DiaryScreen = () => {
   // const [selectedMeal, setSelectedMeal] = useState('Breakfast');
   //Sets meal based on time of day.
   const [selectedMeal, setSelectedMeal] = useState('');
+  const [menuVisible, setMenuVisible] = useState(false);
+
   useEffect(() => {
     const getDefaultMealByTime = () => {
       const hour = new Date().getHours();
@@ -34,6 +34,7 @@ const DiaryScreen = () => {
   };
 
   const defaultMeal = getDefaultMealByTime();
+  
   setSelectedMeal(defaultMeal);
 }, []);
   
@@ -57,15 +58,29 @@ const DiaryScreen = () => {
         <View style={diary_style.header}>
 
           {selectedMeal !== '' && (
-          <Picker
-            selectedValue={selectedMeal}
-            onValueChange={(itemValue) => setSelectedMeal(itemValue)}
-            style={diary_style.picker}
-          >
-            <Picker.Item label="Breakfast" value="Breakfast" />
-            <Picker.Item label="Lunch" value="Lunch" />
-            <Picker.Item label="Dinner" value="Dinner" />
-          </Picker>
+            
+          
+            <Menu
+              visible={menuVisible}
+              onDismiss={() => setMenuVisible(false)}
+              anchor={
+                <Button mode="outlined" onPress={() => setMenuVisible(true)}>
+                  {selectedMeal || 'Select Meal'}
+                </Button>
+              }
+            >
+              {['Breakfast', 'Lunch', 'Dinner'].map((meal) => (
+                <Menu.Item
+                  key={meal}
+                  onPress={() => {
+                    setSelectedMeal(meal);
+                    setMenuVisible(false);
+                  }}
+                  title={meal}
+                />
+              ))}
+            </Menu>
+  
         )}
           
             <FoodSearch onFoodSelect={(item) => addFoodToDiary(selectedMeal, item)} />
@@ -90,5 +105,4 @@ const DiaryScreen = () => {
     
   );
 };
-
 export default DiaryScreen;

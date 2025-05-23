@@ -53,19 +53,10 @@ export default function FoodSearch({ onFoodSelect }: FoodSearchProps) {
         renderItem={({ item }) => (
           <View style={food_search_style.resultItem}>
             <Text>{item.description}</Text>
-            <Button title="Add to Diary" onPress={() => onFoodSelect(item)} />
+            <Button title="Add" onPress={() => onFoodSelect(item)} />
           </View>
         )}
       />
     </View>
   );
 }
-
-
-    
-// export const foodDB = {
-//     Breakfast: ['Eggs', 'Bacon', 'Toast'], 
-//     Lunch: ['Chicken', 'Rice', 'Salad'],
-//     Dinner: ['Steak', 'Potatoes', 'Vegetables'],
-//     Snacks: ['Chips', 'Cookies', 'Fruit']
-// };

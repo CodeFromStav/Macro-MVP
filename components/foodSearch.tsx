@@ -18,17 +18,24 @@ interface FoodSearchProps {
 export default function FoodSearch({ onFoodSelect }: FoodSearchProps) {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState<FoodItem[]>([]);
-    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=banana&api_key=${API_KEY}`;
+    const url = new URL('https://api.nal.usda.gov/fdc/v1/foods/search');
     const searchFood = async () => {
-        try {
-            const res = await fetch(url); //wants string input
-            const data = await res.json();
-            setResults(data.foods || []);
-        } 
-        catch (err) {
+      if (!query.trim()) {
+        alert ('Please enter a food name');
+        return;
+      }
+
+      url.searchParams.append('query', query);
+      url.searchParams.append('api_key', API_KEY);
+
+      try {
+        const result = await fetch(url.toString());
+        const data = await result.json();
+        setResults(data.foods || []);
+      } catch (err) {
         console.error('Error fetching food data:', err);
-        }
-        
+      }
+      setQuery(''); //clears search 
     };
 
  return (

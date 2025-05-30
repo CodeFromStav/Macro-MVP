@@ -59,7 +59,6 @@ const DiaryScreen = () => {
 
           {selectedMeal !== '' && (
             
-          
             <Menu
               visible={menuVisible}
               onDismiss={() => setMenuVisible(false)}
@@ -82,9 +81,8 @@ const DiaryScreen = () => {
             </Menu>
   
         )}
-          
-            <FoodSearch onFoodSelect={(item) => addFoodToDiary(selectedMeal, item)} />
-            <Text style={diary_style.sectionTitle}>Diary Entries</Text>
+          <FoodSearch onFoodSelect={(item) => addFoodToDiary(selectedMeal, item)} /> 
+          <Text style={diary_style.sectionTitle}>Diary Entries</Text>
 
           {Object.entries(diaryItems).map(([meal, items]) => (
             <View key={meal} style={diary_style.sectionCard}>

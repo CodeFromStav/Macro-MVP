@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { Button, FlatList, Text, TextInput, View } from 'react-native';
 import { food_search_style } from './styles';
-
 const API_KEY = 'EYroURX34mSwLrzvq4FvGctYygHSz0Ijgd3EB5Hw';
+
 
 interface FoodItem {
   fdcId: number;
@@ -19,6 +19,7 @@ export default function FoodSearch({ onFoodSelect }: FoodSearchProps) {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState<FoodItem[]>([]);
     const url = new URL('https://api.nal.usda.gov/fdc/v1/foods/search');
+
     const searchFood = async () => {
       if (!query.trim()) {
         alert ('Please enter a food name');
@@ -53,7 +54,13 @@ export default function FoodSearch({ onFoodSelect }: FoodSearchProps) {
         renderItem={({ item }) => (
           <View style={food_search_style.resultItem}>
             <Text>{item.description}</Text>
-            <Button title="Add" onPress={() => onFoodSelect(item)} />
+            <Button 
+              title="Add" 
+              onPress={() => {
+                onFoodSelect(item);
+                setResults([]);
+                // setQuery('');
+              }} />
           </View>
         )}
       />

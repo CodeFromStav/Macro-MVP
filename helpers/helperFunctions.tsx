@@ -38,8 +38,8 @@ export function extractMacros( nutrientsArr: Nutrient[]): Macros {
 }
 
 
-export function sumMealMacros(entries: Macros[]): Macros {
-  return entries.reduce(
+export function sumMealMacros(entriesArr: Macros[]): Macros {
+  return entriesArr.reduce(
     (acc: Macros, cur: Macros): Macros => ({
       calories: acc.calories + cur.calories,
       protein: acc.protein + cur.protein,

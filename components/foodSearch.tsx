@@ -5,7 +5,6 @@ import { Button, FlatList, Text, TextInput, View } from 'react-native';
 import { food_search_style } from './styles';
 const API_KEY = 'EYroURX34mSwLrzvq4FvGctYygHSz0Ijgd3EB5Hw';
 
-
 interface FoodItem {
   fdcId: number;
   description: string;

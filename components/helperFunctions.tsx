@@ -12,7 +12,7 @@ type Macros = {
     carbs: number;
 };
 
-export function extractMacros( nutrients: Nutrient[]): Macros {
+export function extractMacros( nutrientsArr: Nutrient[]): Macros {
     const macros: Macros = {
         calories: 0,
         protein: 0,
@@ -20,7 +20,7 @@ export function extractMacros( nutrients: Nutrient[]): Macros {
         carbs: 0,
     };
 
-    for (const nutrient_index of nutrients) {
+    for (const nutrient_index of nutrientsArr) {
         switch (nutrient_index.nutrientName) {
             case 'Energy':
                 if (nutrient_index.unitName === 'KCAL')
@@ -37,6 +37,18 @@ export function extractMacros( nutrients: Nutrient[]): Macros {
     return macros;
 }
 
+
+export function sumMealMacros(entries: Macros[]): Macros {
+  return entries.reduce(
+    (acc: Macros, cur: Macros): Macros => ({
+      calories: acc.calories + cur.calories,
+      protein: acc.protein + cur.protein,
+      fat: acc.fat + cur.fat,
+      carbs: acc.carbs + cur.carbs,
+    }),
+    { calories: 0, protein: 0, fat: 0, carbs: 0 }
+  );
+}
 
 
 
